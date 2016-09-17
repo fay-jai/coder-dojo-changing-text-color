@@ -3,14 +3,32 @@
     <head>
         <meta charset="utf-8">
         <title>CoderDojo: Changing Colors</title>
+        <style>
+            #lorem-ipsum {
+                line-height: 30px;
+                margin: 30px;
+            }
+
+            .button-group {
+                margin: 30px auto;
+                width: 400px;
+            }
+
+            .button-group > button {
+                font-size: 24px;
+                height: 50px;
+            }
+        </style>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/randomcolor/0.4.4/randomColor.min.js"></script>
     </head>
     <body>
         <div id="lorem-ipsum">Fusce pulvinar vitae metus ac feugiat. Donec imperdiet suscipit enim, sed vehicula tellus feugiat et. In nec consectetur mauris. Aenean pretium tincidunt turpis non interdum. Donec iaculis tempor facilisis. Ut tortor risus, efficitur a vehicula id, ultrices eu diam. Mauris libero nisl, sagittis nec ultrices in, viverra a nunc. Maecenas tempor est urna. Sed nec tortor nisi. Donec sed dapibus lorem. Proin ipsum nunc, feugiat non metus nec, gravida efficitur lorem. Nunc porttitor viverra velit, nec mollis ante sagittis vitae. Fusce faucibus scelerisque orci ac tincidunt. Mauris pellentesque quam non purus vestibulum feugiat. Proin dictum, odio sit amet bibendum lacinia, sapien justo ornare justo, a tempus odio purus non justo.</div>
 
-        <button id="change-color" onclick="main()">
-            Change Color!
-        </button>
+        <div class="button-group">
+            <button id="change-color" onclick="main()">
+                Change Color!
+            </button>
+        </div>
 
         <script>
             var targetId = "lorem-ipsum";
