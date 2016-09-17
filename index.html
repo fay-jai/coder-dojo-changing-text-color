@@ -3,14 +3,71 @@
     <head>
         <meta charset="utf-8">
         <title>CoderDojo: Changing Colors</title>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/randomcolor/0.4.4/randomColor.min.js"></script>
     </head>
     <body>
-        <div id="lorem-ipsum">
-            Fusce pulvinar vitae metus ac feugiat. Donec imperdiet suscipit enim, sed vehicula tellus feugiat et. In nec consectetur mauris. Aenean pretium tincidunt turpis non interdum. Donec iaculis tempor facilisis. Ut tortor risus, efficitur a vehicula id, ultrices eu diam. Mauris libero nisl, sagittis nec ultrices in, viverra a nunc. Maecenas tempor est urna. Sed nec tortor nisi. Donec sed dapibus lorem. Proin ipsum nunc, feugiat non metus nec, gravida efficitur lorem. Nunc porttitor viverra velit, nec mollis ante sagittis vitae. Fusce faucibus scelerisque orci ac tincidunt. Mauris pellentesque quam non purus vestibulum feugiat. Proin dictum, odio sit amet bibendum lacinia, sapien justo ornare justo, a tempus odio purus non justo.
-        </div>
+        <div id="lorem-ipsum">Fusce pulvinar vitae metus ac feugiat. Donec imperdiet suscipit enim, sed vehicula tellus feugiat et. In nec consectetur mauris. Aenean pretium tincidunt turpis non interdum. Donec iaculis tempor facilisis. Ut tortor risus, efficitur a vehicula id, ultrices eu diam. Mauris libero nisl, sagittis nec ultrices in, viverra a nunc. Maecenas tempor est urna. Sed nec tortor nisi. Donec sed dapibus lorem. Proin ipsum nunc, feugiat non metus nec, gravida efficitur lorem. Nunc porttitor viverra velit, nec mollis ante sagittis vitae. Fusce faucibus scelerisque orci ac tincidunt. Mauris pellentesque quam non purus vestibulum feugiat. Proin dictum, odio sit amet bibendum lacinia, sapien justo ornare justo, a tempus odio purus non justo.</div>
 
         <script>
-        
+            var targetId = "lorem-ipsum";
+
+            // Get all the text inside of an element
+            var getText = function(id) {
+                return document.getElementById(id).textContent;
+            };
+
+            // Transform a sentence into a list of words
+            var parseText = function(sentence) {
+                return sentence.split(" ").filter(function(text) {
+                    return text.length > 0;
+                });
+            };
+
+            // Transform a list of words into a list of span elements with the word inside
+            var wrapTextWithSpan = function(listOfText) {
+                return listOfText.map(function(text) {
+                    var element = document.createElement("span");
+                    var content = document.createTextNode(text + " ");
+                    element.appendChild(content);
+                    return element;
+                });
+            };
+
+            // Modify an element and add a list of elements as children
+            var replaceText = function(id, listOfElements) {
+                var target = document.getElementById(id);
+                target.innerHTML = "";
+
+                listOfElements.forEach(function(el) {
+                    target.appendChild(el);
+                });
+            };
+
+            var getRandomColor = function() {
+                // NOTE: This depends on a 3rd party library that provides the randomColor() function
+                return randomColor();
+            };
+
+            // Get a list of elements and add a color to its text content
+            var changeColor = function(tagName) {
+                var elements = document.getElementsByTagName(tagName);
+                // Can't use .forEach on a HTMLCollection :(
+                var length = elements.length;
+                for (var i = 0; i < length; i += 1) {
+                    var el = elements[i];
+                    var color = "color: " + getRandomColor();
+                    el.setAttribute("style", color);
+                }
+            };
+
+            var main = function() {
+                var text = getText(targetId);
+                var parsed = parseText(text);
+                var wrapped = wrapTextWithSpan(parsed);
+
+                replaceText(targetId, wrapped);
+                changeColor("span");
+            };
         </script>
     </body>
 </html>
